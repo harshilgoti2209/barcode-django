@@ -7,4 +7,5 @@ urlpatterns = [
      path('logout/',logout,name='loout'), 
      path('dashboard/',dashboard,name='dashboard'), 
      path('scan/',scan,name='scan'), 
+     path('imagcapture/',scan2,name='scan2'), 
 ]
