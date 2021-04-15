@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import UserSignUpForm
 from django.contrib.auth import logout as logout_,login as login_,authenticate,update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm 
+from django.views.decorators.csrf import csrf_exempt 
 from .models import Profile
+from .qrcode import scanner
 # Create your views here.
 
 def home(request):
@@ -49,4 +51,14 @@ def scan(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        
+        if request.method=='POST':
+            data=request.POST.get('data')
+            print(data)
+        else:
+            return render(request,'scan.html')
+@csrf_exempt
+def scan2(request):
+    for key, value in request.POST.items():
+        print ("%s %s" % (key, value))
+    print('hello')
+    return 'sqasa'
