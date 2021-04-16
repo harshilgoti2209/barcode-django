@@ -82,7 +82,7 @@ body {
     line-height: 1.5;
     color: #CFD8DC;
     text-align: left;
-    background-color: #a31818;
+    background-color: #ffffff;
 }
 
 [tabindex="-1"]:focus {
@@ -10369,7 +10369,8 @@ body {
     left: 0;
     top: 0;
     content: "";
-    background-color: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(to right bottom, rgba(192, 57, 43, 0.8), rgba(142, 68, 173, 0.8)), url('../photo/271687.jpg');
+    background-size: cover;
 }
 
 .bg-hero .container {
