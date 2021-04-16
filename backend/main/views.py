@@ -7,6 +7,7 @@ from .qrcode import scanner
 from django.http import HttpResponse
 import pyzbar.pyzbar as pyzbar
 import json
+
 def home(request):
     return render(request,'home.html')
 
