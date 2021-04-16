@@ -31,7 +31,19 @@ class Account(AbstractBaseUser):
     is_admin=models.BooleanField(default=False)
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
-    is_superuser=models.BooleanField(default=False)
+    is_superuser=models.BooleanField(default=False)    
+
+    
+    Diabetes=models.BooleanField(default=False)    
+    Cholesterol=models.BooleanField(default=False)    
+    High_BP=models.BooleanField(default=False)    
+    Low_BP=models.BooleanField(default=False)    
+    Pcos_Pcod=models.BooleanField(default=False)    
+    Fever=models.BooleanField(default=False)    
+    Cold=models.BooleanField(default=False)    
+    Cough=models.BooleanField(default=False)    
+    Non=models.BooleanField(default=False)    
+
     
     USERNAME_FIELD='email'
 
@@ -46,11 +58,18 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-class Profile(models.Model):
-    Email=models.EmailField(max_length=70)
-    Cholesterol=models.BooleanField(default=False)
-    Bp_high=models.BooleanField(default=False)
-    Bp_low=models.BooleanField(default=False)
-    Pcos_Pcod=models.BooleanField(default=False)
-    Diabetes=models.BooleanField(default=False)
-    Cold=models.BooleanField(default=False)
+
+class Dataitem(models.Model):
+    item=models.CharField(max_length=100 ,primary_key=True)
+    calories=models.IntegerField()
+    totalfat=models.IntegerField()
+    Saturatedfat=models.IntegerField()
+    Sodium=models.IntegerField()
+    TotalCarbohydrate=models.IntegerField()
+    DietaryFiber=models.IntegerField()
+    Sugar=models.IntegerField()
+    Protein=models.IntegerField()
+    VitaminD=models.IntegerField()
+    Calcium=models.IntegerField()
+    Iron=models.IntegerField()
+    Potassium=models.IntegerField()
