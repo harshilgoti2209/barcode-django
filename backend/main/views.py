@@ -3,10 +3,8 @@ from .forms import UserSignUpForm,AuthForm,ProfileForm,AdditemForm
 from django.contrib.auth import logout as logout_,login as login_,authenticate,update_session_auth_hash 
 from django.views.decorators.csrf import csrf_exempt 
 from .models import Account,Dataitem
-from .qrcode import scanner
 from django.http import HttpResponse
-import pyzbar.pyzbar as pyzbar
-import json
+from django.contrib import messages
 
 def home(request):
     return render(request,'home.html')
@@ -44,7 +42,7 @@ def login(request):
 
 def logout(request):
     logout_(request)
-    return redirect('login')
+    return redirect('home')
 
 def dashboard(request):
     if not request.user.is_authenticated:
@@ -85,21 +83,19 @@ def additem(request,name):
             fm=AdditemForm()
         return render(request,'additem.html',{'form':fm})
 
-@csrf_exempt
 def scan(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        if request.method == 'POST':
-            data = request.POST.get('data')
-            print(data)
+        if request.method=='POST':
+            data=Dataitem.objects.filter(item=request.POST['barcode'])
+            if data.count()>0:
+                data=Dataitem.objects.get(item=request.POST['barcode'])
+                human=Account.objects.get(gmail=request.user)
+                if human.Diabetes==True && data.Sugar>230
+                return redirect('dashboard')
+            else:
+                return redirect( 'additem', request.POST['barcode'])
+
         else:
             return render(request, 'scan.html')
-
-
-@csrf_exempt
-def scan2(request):
-    for key, val in request.POST.items():
-        print(json.loads(key)['data'])
-
-    return render(request, 'scan.html')
