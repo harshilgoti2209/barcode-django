@@ -18,7 +18,13 @@
 <body>
     <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
-    <input type="button" id="btn" value="Start/Stop the scanner" />
+    <a href="{% url 'dashboard'%}"><button>back</button></a>
+    <form action="" method="post"  id='dummy' style="display:none">  
+            {% csrf_token %}
+            <input type="text" value="hi" id='help' name="barcode">
+            <button type="submit"> search</button>
+    </form>
+
 
     <!-- Include the image-diff library -->
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
@@ -105,20 +111,18 @@
 
 
             Quagga.onDetected(function (result) {
-                console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+                // console.log("Barcode detected and processed : [ " + result.codeResult.code + "]", result);
+                hello(result.codeResult.code);
+                _scannerIsRunning = false;
+                Quagga.stop();
             });
         }
-
-
-        // Start/stop scanner
-        document.getElementById("btn").addEventListener("click", function () {
-            if (_scannerIsRunning) {
-                Quagga.stop();
-            } else {
-                startScanner();
-            }
-        }, false);
-    </script>
+        startScanner();
+        function hello(s){
+            document.getElementById('dummy').style.display='block';
+            document.getElementById('help').value =s;
+        }   
+        </script>
 </body>
 
 </html>
