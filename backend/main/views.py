@@ -91,7 +91,7 @@ def scan(request):
             data=Dataitem.objects.filter(item=request.POST['barcode'])
             if data.count()>0:
                 data=Dataitem.objects.get(item=request.POST['barcode'])
-                human=Account.objects.get(gmail=request.user)
+                human=Account.objects.get(email=request.user)
                 flag=True
                 if human.Diabetes==True and data.calories>100:
                     flag=False
