@@ -19,12 +19,12 @@
     <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
     <a href="{% url 'dashboard'%}"><button>back</button></a>
+    <a href="{% url 'scan'%}"> <button> scan again </button></a>
     <form action="" method="post"  id='dummy' style="display:none">  
-            {% csrf_token %}
-            <input type="text" value="hi" id='help' name="barcode">
-            <button type="submit"> search</button>
+        {% csrf_token %}
+        <input type="text" value="hi" id='help' name="barcode">
+        <button type="submit"> search</button>
     </form>
-
 
     <!-- Include the image-diff library -->
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
