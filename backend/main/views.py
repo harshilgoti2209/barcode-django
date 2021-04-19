@@ -92,10 +92,22 @@ def scan(request):
             if data.count()>0:
                 data=Dataitem.objects.get(item=request.POST['barcode'])
                 human=Account.objects.get(gmail=request.user)
-                if human.Diabetes==True && data.Sugar>230
-                return redirect('dashboard')
+                flag=True
+                if human.Diabetes==True and data.calories>100:
+                    flag=False
+                if human.Cholesterol==True and data.totalfat>200:
+                    flag=False
+                if human.High_BP==True and (data.Sugar>1 or data.Sodium > 1):
+                    flag=False
+                if human.Low_BP==True and (data.Sugar<1 and data.Sodium<1 ):
+                    flag=False
+                if human.Pcos_Pcod==True and ( data.calories>1 or data.totalfat>1 or data.TotalCarbohydrate>1 or data.Protein>1 ):
+                    flag=False
+                return redirect('result', str(flag))
             else:
                 return redirect( 'additem', request.POST['barcode'])
-
         else:
             return render(request, 'scan.html')
+
+def result(request, type):
+    return render(request,'result.html', {'type':type})
