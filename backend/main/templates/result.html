@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    {% if type == '1'%}
+    {% if type == 'False'%}
       <p> {{type}} </p>
     {% endif%} 
-    {% if type == '0'%}
+    {% if type == 'True'%}
       <p> {{type}} </p>
     {% endif%}  
-    <a href="{% url 'scan' %}"><button> back</button></a>
+    <a href="{% url 'dashboard' %}"><button> back</button></a>
 </body>
 </html>
